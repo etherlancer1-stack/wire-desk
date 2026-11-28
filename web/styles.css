@@ -1,0 +1,52 @@
+/* Wire Desk — lightweight, high-contrast dashboard styles (specs #216-218). */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #0b0c10; color: #c5c6c7; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.5; }
+body { font-size: 14px; }
+
+.topbar { background: #1a1b21; border-bottom: 1px solid #2a2b32; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 50; }
+.brand { font-weight: 700; font-size: 18px; letter-spacing: 0.5px; color: #ffffff; }
+.actions { display: flex; gap: 8px; }
+
+.btn { border: 1px solid #3a3b42; background: #1f2025; color: #c5c6c7; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 13px; }
+.btn:hover { border-color: #5c5f66; }
+.btn-primary { background: #2f6fdf; border-color: #2f6fdf; color: #fff; }
+.btn-primary:hover { background: #3b7cff; }
+.btn-outline { background: transparent; }
+.btn-sm { padding: 6px 12px; font-size: 12px; }
+
+.container { max-width: 1000px; margin: 24px auto; padding: 0 16px; }
+.hero { text-align: center; padding: 48px 16px; }
+.hero h1 { font-size: 30px; margin: 0 0 12px; color: #ffffff; }
+.hero p { font-size: 16px; color: #a0a1a7; max-width: 620px; margin: 0 auto 24px; }
+.hero-actions { display: flex; gap: 12px; justify-content: center; }
+
+.card { background: #111217; border: 1px solid #2a2b32; border-radius: 10px; padding: 20px; margin-bottom: 20px; }
+.card.hidden { display: none; }
+.card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; border-bottom: 1px solid #2a2b32; padding-bottom: 10px; }
+.card-header h2 { margin: 0; font-size: 18px; color: #ffffff; }
+.user-info { font-size: 13px; color: #8e8f94; }
+
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid-2 { grid-template-columns: 1fr 1fr; }
+.full { grid-column: 1 / -1; }
+
+.panel h3 { margin: 0 0 12px; font-size: 15px; color: #ffffff; }
+.list { color: #a0a1a7; font-size: 13px; min-height: 60px; }
+.list.empty { color: #66676c; font-style: italic; }
+
+.form { display: grid; gap: 12px; }
+.form-row { display: flex; gap: 8px; align-items: center; }
+.form-row input { flex: 1; background: #0b0c10; border: 1px solid #3a3b42; color: #c5c6c7; padding: 10px 12px; border-radius: 6px; font-size: 14px; }
+.form-row input:focus { border-color: #2f6fdf; outline: none; }
+
+.result { margin-top: 12px; padding: 12px; background: #0f1014; border: 1px solid #2a2b32; border-radius: 6px; }
+.result.hidden { display: none; }
+
+.footer { border-top: 1px solid #2a2b32; padding: 20px 16px; text-align: center; font-size: 12px; color: #66676c; }
+.footer a { color: #2f6fdf; text-decoration: none; }
+
+@media (max-width: 640px) {
+  .grid { grid-template-columns: 1fr; }
+  .topbar .actions { display: none; }
+  .hero h1 { font-size: 22px; }
+}

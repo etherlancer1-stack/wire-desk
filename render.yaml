@@ -1,0 +1,30 @@
+# Wire Desk — Render deployment config (spec #231).
+services:
+  - type: web
+    name: wire-desk
+    env: docker
+    dockerfile: ./Dockerfile
+    plan: starter
+    region: ohio
+    disk:
+      name: data
+      mount_path: /app/data
+      size_gb: 10
+    envVars:
+      - key: WIREDESK_ENV
+        value: production
+      - key: WIREDESK_LOG_LEVEL
+        value: info
+      - key: WIREDESK_LOG_FORMAT
+        value: json
+      - key: WIREDESK_OFFLINE_MOCK
+        value: "true"
+      - key: WIREDESK_JWT_SECRET
+        generate: true
+      - key: WIREDESK_WEBHOOK_SECRET
+        generate: true
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+    healthCheckPath: /healthz

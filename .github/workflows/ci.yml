@@ -1,0 +1,44 @@
+# Wire Desk — GitHub Actions CI (spec #232).
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy, rustfmt
+
+      - name: Rust fmt
+        run: cargo fmt --manifest-path crates/wired/Cargo.toml -- --check
+
+      - name: Rust clippy
+        run: cargo clippy --manifest-path crates/wired/Cargo.toml -- -D warnings
+
+      - name: Rust test
+        run: cargo test --manifest-path crates/wired/Cargo.toml
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Install TypeScript deps
+        working-directory: ./src-ts
+        run: npm install
+
+      - name: TypeScript typecheck
+        working-directory: ./src-ts
+        run: npx tsc --noEmit
+
+      - name: Smoke test
+        run: |
+          bash scripts/smoke_test.sh

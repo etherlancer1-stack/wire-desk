@@ -1,0 +1,40 @@
+# Wire Desk — docker-compose (spec #230).
+# Named persistent volume for SQLite/data/backups. Healthcheck included.
+services:
+  wired:
+    build: .
+    container_name: wire-desk
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      WIREDESK_ENV: production
+      WIREDESK_HOST: 0.0.0.0
+      WIREDESK_PORT: 8080
+      WIREDESK_DB_PATH: /app/data/wire-desk.db
+      WIREDESK_DATA_DIR: /app/data
+      WIREDESK_LOG_DIR: /app/logs
+      WIREDESK_BACKUP_DIR: /app/backups
+      WIREDESK_LOG_LEVEL: info
+      WIREDESK_LOG_FORMAT: json
+      # Secrets must be injected at runtime; never committed.
+      WIREDESK_JWT_SECRET: ${WIREDESK_JWT_SECRET}
+      WIREDESK_WEBHOOK_SECRET: ${WIREDESK_WEBHOOK_SECRET}
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET}
+      WIREDESK_OFFLINE_MOCK: "true"
+    volumes:
+      - wire-desk-data:/app/data
+      - wire-desk-logs:/app/logs
+      - wire-desk-backups:/app/backups
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://127.0.0.1:8080/healthz"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+volumes:
+  wire-desk-data:
+  wire-desk-logs:
+  wire-desk-backups:

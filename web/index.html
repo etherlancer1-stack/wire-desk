@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wire Desk — Security & AI Operations</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">Wire Desk</div>
+  <div class="actions">
+    <button class="btn btn-outline" id="btnLogin">Log in</button>
+    <button class="btn" id="btnSignup">Sign up</button>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <h1>Autonomous agent operations &amp; defensive security auditing</h1>
+    <p>Low-footprint Rust backend, SQLite persistence, multi-tenant SaaS. Run agents, security scans, and billing on any Linux host.</p>
+    <div class="hero-actions">
+      <button class="btn btn-primary" id="btnGrade">Run free security grader</button>
+      <button class="btn btn-outline" id="btnDocs">View API docs</button>
+    </div>
+  </section>
+
+  <section id="dashboard" class="card hidden">
+    <div class="card-header">
+      <h2>Dashboard</h2>
+      <div class="user-info" id="userInfo"></div>
+    </div>
+    <div class="grid grid-2">
+      <div class="panel">
+        <h3>Agent Runs</h3>
+        <div id="agentRunsList" class="list">Loading...</div>
+        <button class="btn btn-sm" id="btnNewRun">New agent run</button>
+      </div>
+      <div class="panel">
+        <h3>Security Findings</h3>
+        <div id="findingsList" class="list">Loading...</div>
+        <button class="btn btn-sm" id="btnNewScan">New scan</button>
+      </div>
+    </div>
+    <div class="panel full">
+      <h3>Usage &amp; Billing</h3>
+      <div id="usageInfo">Loading...</div>
+      <button class="btn btn-sm" id="btnPlans">View plans</button>
+    </div>
+  </section>
+
+  <section id="grader" class="card hidden">
+    <div class="card-header"><h2>Public Security Grader</h2></div>
+    <div class="form-row">
+      <input type="url" id="graderTarget" placeholder="https://example.com" required>
+      <button class="btn" id="btnRunGrade">Grade</button>
+    </div>
+    <div id="graderResult" class="result hidden"></div>
+  </section>
+
+  <section id="auth" class="card hidden">
+    <div class="card-header"><h2 id="authTitle">Sign in</h2></div>
+    <form id="authForm" class="form">
+      <div class="form-row"><input type="email" id="authEmail" placeholder="Email" required></div>
+      <div class="form-row"><input type="password" id="authPassword" placeholder="Password" required></div>
+      <div class="form-row"><input type="text" id="authTenant" placeholder="Tenant slug (signup only)"></div>
+      <button class="btn btn-primary" id="authSubmit">Continue</button>
+      <button class="btn btn-outline" type="button" id="authToggle">Switch to signup</button>
+    </form>
+  </section>
+</main>
+
+<footer class="footer">
+  <span>Wire Desk v0.1.0 &middot; <a href="https://github.com/etherlancer1/wire-desk">GitHub</a> &middot; <a href="https://github.com/wireapp/wire-desktop">Reference upstream</a></span>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

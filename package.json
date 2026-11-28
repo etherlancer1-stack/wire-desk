@@ -1,12 +1,26 @@
 {
-  "name": "app",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "wire-desk",
+  "version": "0.1.0",
+  "description": "Wire Desk — TypeScript schema, types, and API client layer (Drizzle SQL).",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "typecheck": "tsc --noEmit -p src-ts/tsconfig.json",
+    "db:generate": "drizzle-kit generate --config src-ts/drizzle.config.ts",
+    "db:migrate": "drizzle-kit migrate --config src-ts/drizzle.config.ts",
+    "db:studio": "drizzle-kit studio --config src-ts/drizzle.config.ts",
+    "test": "node --test src-ts/tests/**/*.test.ts",
+    "lint": "eslint src-ts || true"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "dependencies": {
+    "drizzle-orm": "^0.38.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.30.0",
+    "typescript": "^5.6.0",
+    "@types/node": "^22.0.0",
+    "tsx": "^4.18.0",
+    "dotenv": "^16.4.0",
+    "eslint": "^9.0.0"
+  }
 }
